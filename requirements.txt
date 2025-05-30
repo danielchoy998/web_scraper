@@ -1,0 +1,5 @@
+praw>=7.7.0          # Official Reddit API wrapper
+pmaw>=3.0.0          # Pushshift API wrapper (optional, if you use it)
+requests>=2.28.0     # HTTP requests
+python-dotenv>=1.0.0 # Load .env variables
+opencv-python>=4.7.0 # Download and save images via cv2

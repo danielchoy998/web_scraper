@@ -6,6 +6,7 @@ import requests
 import cv2
 import numpy as np
 import csv
+import argparse
 
 class Reddit_Scraper:
     def __init__(self, limit : int = 10):
