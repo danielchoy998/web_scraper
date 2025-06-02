@@ -9,7 +9,7 @@ import csv
 import argparse
 
 class Reddit_Scraper:
-    def __init__(self, limit : int = 10):
+    def __init__(self, limit : int = 6):
         load_dotenv()
         self.limit = limit
         self.reddit = praw.Reddit(
@@ -18,7 +18,7 @@ class Reddit_Scraper:
             user_agent=os.getenv("USER_AGENT")
         )
     
-    def scrape_by_id(self, id : str):
+    def scrape_by_id(self, id : str) -> None:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
         }
@@ -49,20 +49,21 @@ class Reddit_Scraper:
         scores = submission.score
         self.save_comments(id, comments, scores)
     
-    def scrape_by_subreddit(self, subreddit_name : str):
+    def scrape_by_subreddit(self, subreddit_name : str) -> None:
         limit = self.limit
         subreddit = self.reddit.subreddit(subreddit_name)
         for submission in subreddit.new(limit = limit):
             self.scrape_by_id(submission.id)
 
-    def save_image(self, id, img):
+   
+    def save_image(self, id, img) -> None:
         save_dir = "./data/reddit/images"
         os.makedirs(save_dir, exist_ok=True)
         save_path = os.path.join(save_dir, f"{id}.jpg")
         cv2.imwrite(save_path, img)
         print(f"Image saved to {save_path}")
  
-    def save_comments(self, id, comments, scores):
+    def save_comments(self, id, comments, scores) -> None:
         save_dir = "./data/reddit/comments"
         os.makedirs(save_dir, exist_ok=True)
         save_path = os.path.join(save_dir, f"photo_review.csv")
@@ -82,6 +83,7 @@ class Reddit_Scraper:
                 })
 
         print(f"Comments saved to {save_path}")
+        
 def main():
     scraper = Reddit_Scraper(limit = 5)
     print("Test with scraping started")
