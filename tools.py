@@ -1,7 +1,6 @@
 from langchain_core.tools import tool
 from reddit_scraper import Reddit_Scraper
 from langchain_tavily import TavilySearch
-from langgraph.types import interrupt
 
 scraper = Reddit_Scraper(5)
 
@@ -10,16 +9,7 @@ class Tools:
         self.tools = [Tools.multiply,
                       Tools.scrape_reddit,
                       Tools.web_search]
-
-    @staticmethod
-    @tool
-    def human_assistance(query: str) -> str:
-        """
-        Request human assistance with the given query.
-        """
-        human_response = interrupt({"query": query})
-        return human_response["data"]
-
+    
     @staticmethod
     @tool
     def scrape_reddit(subreddit_name: str) -> str:
@@ -55,7 +45,6 @@ class Tools:
     @property
     def get_tools(self,) -> list[tool]:
         return self.tools
-
 
 def main():
     tool_list = Tools()

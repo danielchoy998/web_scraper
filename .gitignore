@@ -1,5 +1,8 @@
 .env
 test.py
+test2.py
 venv/
 data/
 __pycache__/
+chatbot.py
+models.py
