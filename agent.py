@@ -8,7 +8,7 @@ from langgraph.checkpoint.memory import MemorySaver
 from dotenv import load_dotenv
 from tools import Tools
 from langgraph.types import Command, interrupt
-from graph_display import display_graph
+from graph_display import display
 from print import print_event
 load_dotenv()
 
@@ -66,7 +66,7 @@ memory = MemorySaver()
 config = {"configurable": {"thread_id": "1"}}
 graph = graph_builder.compile(checkpointer=memory)
 
-display_graph(graph)
+display(graph)
 
 def stream_graph_updates(user_input : dict):
     user_input = {"messages": [{"role": "user", "content": user_input}]}

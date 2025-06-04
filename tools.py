@@ -1,6 +1,7 @@
 from langchain_core.tools import tool
 from reddit_scraper import Reddit_Scraper
 from langchain_tavily import TavilySearch
+from models.gemini import generate_image
 
 scraper = Reddit_Scraper(5)
 
@@ -8,7 +9,8 @@ class Tools:
     def __init__(self,):
         self.tools = [Tools.multiply,
                       Tools.scrape_reddit,
-                      Tools.web_search]
+                      Tools.web_search,
+                      Tools.generate_image]
     
     @staticmethod
     @tool
@@ -42,13 +44,20 @@ class Tools:
         """Multiply two numbers."""
         return a * b
     
+    @staticmethod
+    @tool
+    def generate_image(prompt: str) -> str:
+        """Generate an image based on a prompt."""
+        generate_image(prompt)
+        return "Success"
+    
     @property
     def get_tools(self,) -> list[tool]:
         return self.tools
 
 def main():
     tool_list = Tools()
-    tool_list.scrape_reddit("photocritique")
+    tool_list.generate_image("A cat holding a sign that says hello world")
 
 if __name__ == "__main__":
     main()
