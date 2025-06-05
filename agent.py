@@ -17,7 +17,7 @@ class State(TypedDict):
 
 graph_builder = StateGraph(State)
 
-llm = init_chat_model("openai:gpt-4.1")
+llm = init_chat_model("ollama:qwen3:4b")
 
 tool_list = Tools()
 tools = tool_list.get_tools
